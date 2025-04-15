@@ -1,0 +1,20 @@
+다중 분류
+
+class MultiClassClassifier(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(input_dim, 64)
+        self.fc2 = nn.Linear(64, 32)
+        self.output = nn.Linear(32, num_classes)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = self.output(x)  # softmax 생략!
+        return x
+
+
+criterion = nn.CrossEntropyLoss()  # 손실 함수도 변경
+
+
+pytorch에 기본 softmax 내장되어 있기 때문에 sigmoid의 경우 13번줄에 sigmoid를 추가해야하지만 여기선 생략.
